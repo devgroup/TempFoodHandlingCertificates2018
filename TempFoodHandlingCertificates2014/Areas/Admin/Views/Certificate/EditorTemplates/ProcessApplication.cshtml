@@ -1,0 +1,135 @@
+﻿@model TempFoodHandlingCertificates2014.Models.ProcessApplication
+
+        @Html.HiddenFor(model => model.Id)
+
+        @*<p>
+            Id is @Html.DisplayFor(model => model.Id) <br />
+
+        </p>*@
+<p></p>
+  <div class="row">
+    <div class="col-sm-4 rightMargin"> <!-- start of column for payments-->
+        <h4>Payments</h4>
+
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.ReminderSent, htmlAttributes: new { @class = "control-label col-sm-6" })
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    @Html.DisplayFor(model => model.ReminderSent, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.ReminderSent)
+                    @Html.ValidationMessageFor(model => model.ReminderSent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReminderNotes, htmlAttributes: new { @class = "col-sm-12 text-left" })
+            <div class="col-sm-12">
+                @Html.TextAreaFor(model => model.ReminderNotes, new { @class = "form-control"  })
+                @Html.ValidationMessageFor(model => model.ReminderNotes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.LabelFor(model => model.PaymentRecieved, htmlAttributes: new { @class = "control-label col-sm-6" })
+        <div class="col-sm-6">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.PaymentRecieved, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PaymentRecieved, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AmountDue, htmlAttributes: new { @class = "control-label col-sm-6" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.AmountDue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AmountDue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReceiptNumber, htmlAttributes: new { @class = "control-label col-sm-6" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.ReceiptNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReceiptNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div> <!-- end column for payments -->
+    <!-- Start column for certificates -->
+            <div class="col-sm-4 rightMargin">
+                <h4>Certificates</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CanIssueCertificate, htmlAttributes: new { @class = "control-label col-sm-6" })
+                    <div class="col-sm-6">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.CanIssueCertificate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CanIssueCertificate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CertificateIssuedDate, htmlAttributes: new { @class = "control-label col-sm-6" })
+                    <div class="col-sm-6">
+                       @{
+                           string displayCertificateIssuedDate = "Not Issued"; //Default.
+                           if (Model.CertificateIssuedDate.HasValue)
+                           {
+                               displayCertificateIssuedDate = Model.CertificateIssuedDate.Value.Date.ToString("dd-MMM-yyyy");
+                           }
+                       }
+                       
+                        @displayCertificateIssuedDate
+                        
+                    </div>
+
+                    <div class="col-sm-6">
+                         @Html.ActionLink("Issue Certificate", "IssueCertificate", new { id= Model.Application.AppID })
+                     </div>
+                     
+                </div>
+
+                <!-- Additonal section added for archiving 18-Sept 2016 -->
+                <div>
+            @Html.LabelFor(model => model.IsDeleted, htmlAttributes: new { @class = "col-md-6 text-left" })
+            <div class="col-sm-6">
+                @Html.EditorFor(model => model.IsDeleted, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
+            </div>
+            </div>
+
+            </div>
+            <div class="col-md-4">
+                <h4>Inspections</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InspectionRequired, htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-6">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.InspectionRequired, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.InspectionRequired, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "col-md-6 text-left" })
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Comments, new {@class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.PaymentLastCheckedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PaymentLastCheckedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PaymentLastCheckedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        
+       

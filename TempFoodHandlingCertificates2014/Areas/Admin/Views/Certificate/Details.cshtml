@@ -1,0 +1,106 @@
+﻿@model TempFoodHandlingCertificates2014.Models.Application
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Application</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AppID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AppID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GUID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GUID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmittedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmittedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StallDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StallDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicantDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicantDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StallType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StallType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HowFoodsKeptCold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HowFoodsKeptCold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HowFoodsKeptHot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HowFoodsKeptHot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HandwashFacilities)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HandwashFacilities)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

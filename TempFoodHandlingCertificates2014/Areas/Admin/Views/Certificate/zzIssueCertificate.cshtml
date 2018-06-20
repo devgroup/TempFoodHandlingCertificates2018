@@ -1,0 +1,114 @@
+﻿@model TempFoodHandlingCertificates2014.Areas.Admin.ViewModels.vmIssueCertificate
+
+
+@{
+    ViewBag.Title = "PrintCertificate";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPrint.cshtml";
+}
+
+@*<link href="~/Content/PrintStyleSheet.css" rel="stylesheet" media="print"/>*@
+
+<link href="~/Content/PrintStyleSheet.css" rel="stylesheet" media="print"/>
+<input class="NoPrint" type="button" value="Print" onclick="window.print();"/>
+<a href="mailto:wasst@hobartcity.com.au?Subject=Email link to certificate@body=In comes a guy dressed up like the Union Jack">Email certificate</a>
+<div class="container">
+    @*<div id="pageborder" style="width:190mm; background-color:aliceblue;">*@
+    <div id="pageborder" style="width:190mm;">
+        <table border="0">
+            <tr>
+                <td>
+                    <img src="~/Content/images/logo-hcc.gif" height="100" style="margin-left: 30px" />
+                </td>
+                <td width="80%">
+                    <div class="text-center">
+                        <h3> CERTIFICATE OF REGISTRATION</h3>
+                    </div>
+                    <div class="text-center">
+                        <h3> OF A TEMPORARY FOOD BUSINESS </h3>
+                    </div>
+                    <div class="col-md-10 text-center">
+                        <h3 style="font-size: 120%"><em>Food Act 2003</em></h3>
+                        <h3 style="font-size: 120%"><em>S.87 &amp; S.88</em></h3>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    The Hobart City Council, pursuant to S.87 and S.88 of the Food Act 2003 hereby registers the business
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Known as
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.StallBusinessName)
+                </td>
+            </tr>
+            <tr>
+                <td>For the event</td>
+                <td>@Html.DisplayFor(model => model.EventName) </td>
+            </tr>
+            <tr>
+                <td>Situated at</td>
+                <td>@Html.DisplayFor(model => model.EventLocation)</td>
+            </tr>
+            <tr>
+                <td>Event start date</td>
+                <td>@Html.DisplayFor(model => model.EventLocation)</td>
+            </tr>
+            <tr>
+                <td>Proprietor</td>
+                <td>@Html.DisplayFor(model => model.ApplicantName)</td>
+            </tr>
+            <tr>
+
+        </table>
+        <div>
+            as a food business for the handling of food for sale or the sale of food subject to the following conditions:
+            <ul>
+                <li>This certificate permits the sale of foods listed on the application only</li>
+                <li>This certificate is only valid for the date and duration of this event.</li>
+                <li>Adequate hand washing facilities must be provided in accordance with the Department of Health &amp; Human Services Local Government Guidelines for Temporary Food Stalls.</li>
+                <li>Potentially hazardous foods will be kept above 60&deg;C for hot food and under 50&deg;C for cold foods.</li>
+                <li>The proprietor must comply with the requirements of the Department of Health &amp; Human Services Local Government Guidelines for Temporary Food Stalls.</li>
+                <li>This certificate must be displayed in a prominent position within the food stall</li>
+                <li>The food stall may be inspected by an authorised officer. The proprietor may be subject to enforcement action should any items of non-compliance be identified.</li>
+            </ul>
+
+        </div>
+
+        <div>
+            <h4>Manager Environmental Health</h4>
+            
+            <pre>
+                            Certificate No:  @Html.DisplayFor(model => model.AppId)
+                            Date of Issue:   @DateTime.Now.Date.ToShortDateString()
+            </pre>
+            <strong>THIS REGISTRATION IS NOT TRANSFERABLE</strong>
+            <div style="font-style:italic">
+                <h4>Review:</h4>
+                <div>
+                    In accordance with section 93, you may apply to the Magistrates Court (Administrative Appeals
+                    Division) for a review of decisions relating to registration within 28 days after the:
+                </div>
+                <ol style="list-style: lower-alpha">
+                    <li>
+                        issue of the certificate of registration under section 87(6) or renewal of registration under
+                        section 89(4); or
+                    </li>
+                    <li> giving of notice of refusal under section 87(7) or section 89(5); or</li>
+                    <li> service of the notice of the variation, suspension or cancellation under section 91(5).</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <p>
+
+        @Html.ActionLink("Return to list", "Index=", null, htmlAttributes: new { @class = "NoPrint" })
+
+        @*@Html.ActionLink("Return to process application", "Edit", new { id = Model.AppId });*@
+    </p>
+
+</div>

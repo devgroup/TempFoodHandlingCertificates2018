@@ -1,0 +1,100 @@
+﻿@model IEnumerable<TempFoodHandlingCertificates2014.Models.Application>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AppID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GUID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmittedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StallDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicantDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StallType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HowFoodsKeptCold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HowFoodsKeptHot)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HandwashFacilities)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessApplication.GUID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GUID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubmittedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StallDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicantDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StallType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FoodDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HowFoodsKeptCold)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HowFoodsKeptHot)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HandwashFacilities)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProcessApplication.GUID)
+        </td>
+        <td>
+
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+        </td>
+    </tr>
+}
+
+</table>

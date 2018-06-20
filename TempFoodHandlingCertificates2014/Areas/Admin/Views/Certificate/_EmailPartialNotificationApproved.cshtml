@@ -1,0 +1,75 @@
+﻿
+@model int
+
+@{
+    var db = new TempFoodHandlingCertificates2014.Models.TempFoodStallEDMContainer();
+
+    var app = db.Applications
+
+        .Where(e => e.AppID.HasValue)
+        .Where(e => e.AppID.Value == Model)
+        .FirstOrDefault();
+
+
+    var applicantName = app.ApplicantDetails.ApplicantName;
+    var foodEventName = String.Empty;
+
+    if (app != null)
+    {
+        foodEventName = db.Applications.Where(e => e.AppID == app.AppID).FirstOrDefault().EventDetails.EventName;
+    }
+
+
+
+    string lb = "%0D%0A";
+
+    string mailBody = String.Concat(
+        "Dear ", applicantName,
+        lb,
+        "Thank you for your online application to operate a food stall - " + app.StallDetails.StallBusinessName + ".",
+        lb,lb,
+        "You have indicated in your application that you will not be selling any potentially hazardous foods so a certificate of registration will not be issued. However your application will be taken as a Notification of your intention to sell food to the public and this meets the Food Act 2003 requirement to Notify.",
+        lb,lb,
+        "Please note that although your stall only requires Notification it must still comply with the Food Safety Standards and may be inspected by an Environmental Health Officer. ",
+        lb,
+        "The Guidelines for Mobile Food Businesses at the following link will help you to make sure your stall complies with these standards. ",
+        lb,
+
+        "http://www.dhhs.tas.gov.au/__data/assets/pdf_file/0004/208570/Guidelines_for_Mobile_Food_Businesses_Dec_2015.pdf",
+        lb,
+
+// "<a href = \"http://www.dhhs.tas.gov.au/__data/assets/pdf_file/0004/208570/Guidelines_for_Mobile_Food_Businesses_Dec_2015.pdf\" class=\"pdf\">Guidelines for Mobile Food Businesses</a>",
+//  lb, 
+
+
+lb, lb,
+"If you have any questions please contact the Environmental Health Unit on 6238 2715.",
+lb,
+lb,
+"Regards,",
+
+
+"City of Hobart", lb,
+"Environmental Health Unit", lb,
+"6238 2715"
+);
+
+    string subject = "Notification regarding your temporary food event";
+
+    if (!String.IsNullOrEmpty(foodEventName))
+    {
+        subject += " for " + foodEventName;
+    }
+
+    string recipient = app.ApplicantDetails.ApplicantEmail;
+}
+
+
+<script type="text/javascript">
+
+    @*//alert("@href");*@
+
+    window.location.href = "mailto:@recipient?subject=@subject&body=@mailBody";
+
+
+</script>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9016286f6b4a4971a0b739ded6fe79e2" Name="Diagram1" >
+        <EntityTypeShape EntityType="TempFoodStallEDM.Application" Width="3" PointX="4.5" PointY="0.75" />
+        <EntityTypeShape EntityType="TempFoodStallEDM.FoodEvent" Width="2.5" PointX="0.5" PointY="1.875" />
+        <AssociationConnector Association="TempFoodStallEDM.FoodEventApplication" />
+        <EntityTypeShape EntityType="TempFoodStallEDM.ProcessApplication" Width="3.5" PointX="8.5" PointY="0.75" />
+        <AssociationConnector Association="TempFoodStallEDM.ApplicationProcessApplication" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TempFoodStallEDM.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TempFoodStallEDMStoreContainer">
+    <EntitySet Name="Applications" EntityType="TempFoodStallEDM.Store.Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FoodEvents" EntityType="TempFoodStallEDM.Store.FoodEvents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProcessApplications" EntityType="TempFoodStallEDM.Store.ProcessApplications" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FoodEventApplication" Association="TempFoodStallEDM.Store.FoodEventApplication">
+      <End Role="FoodEvent" EntitySet="FoodEvents" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="ApplicationProcessApplication" Association="TempFoodStallEDM.Store.ApplicationProcessApplication">
+      <End Role="Application" EntitySet="Applications" />
+      <End Role="ProcessApplication" EntitySet="ProcessApplications" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Applications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppID" Type="int" Nullable="true" />
+    <Property Name="GUID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SubmittedDate" Type="datetime" Nullable="true" />
+    <Property Name="EventDetails_EventName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EventDetails_EventLocation" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EventDetails_EventDescription" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="EventDetails_EventStartDate" Type="datetime" Nullable="true" />
+    <Property Name="EventDetails_OtherEventDates" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="StallDetails_StallBusinessName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="StallDetails_StallStartTime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="StallDetails_StallFinishTime" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ApplicantDetails_ApplicantName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ApplicantDetails_ApplicantPhoneNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ApplicantDetails_ApplicantEmail" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ApplicantDetails_ApplicantPostalAddress" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="StallType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FoodDetails_FoodDetailsTypeOfFood" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FoodDetails_FoodDetailsWhereStoredPrior" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FoodDetails_FoodDetailsFoodsPreparedOffSite" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FoodDetails_FoodDetailsFoodsPreparedOnSite" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HowFoodsKeptCold" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HowFoodsKeptHot" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HandwashFacilities" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="FoodEvent_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="FoodEvents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EventName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EventStartDate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EventEndDate" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="ProcessApplications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GUID" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PaymentRecieved" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="PaymentReceivedDescription" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PaymentLastCheckedDate" Type="datetime" Nullable="true" />
+    <Property Name="CanIssueCertificate" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="CertificateIssuedDate" Type="datetime" Nullable="true" />
+    <Property Name="AmountDue" Type="decimal" Nullable="true" Precision="18" Scale="0" />
+    <Property Name="Comments" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="InspectionRequired" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ReceiptNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ReminderNotes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ReminderSent" Type="datetime" Nullable="true" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="NotificationSentDate" Type="datetime" Nullable="true" />
+    <Property Name="NotificationApproved" Type="bit" Nullable="true" />
+    <Property Name="Application_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FoodEventApplication">
+    <End Role="FoodEvent" Type="TempFoodStallEDM.Store.FoodEvents" Multiplicity="0..1" />
+    <End Role="Application" Type="TempFoodStallEDM.Store.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FoodEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="FoodEvent_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ApplicationProcessApplication">
+    <End Role="Application" Type="TempFoodStallEDM.Store.Applications" Multiplicity="1" />
+    <End Role="ProcessApplication" Type="TempFoodStallEDM.Store.ProcessApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Application">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProcessApplication">
+        <PropertyRef Name="Application_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TempFoodStallEDM" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TempFoodStallEDMContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="TempFoodStallEDM.Application" />
+          <EntitySet Name="FoodEvents" EntityType="TempFoodStallEDM.FoodEvent" />
+          <AssociationSet Name="FoodEventApplication" Association="TempFoodStallEDM.FoodEventApplication">
+            <End Role="FoodEvent" EntitySet="FoodEvents" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <EntitySet Name="ProcessApplications" EntityType="TempFoodStallEDM.ProcessApplication" />
+          <AssociationSet Name="ApplicationProcessApplication" Association="TempFoodStallEDM.ApplicationProcessApplication">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="ProcessApplication" EntitySet="ProcessApplications" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppID" Type="Int32" Nullable="true" />
+          <Property Name="GUID" Type="String" Nullable="false" />
+          <Property Name="SubmittedDate" Type="DateTime" Nullable="true" />
+          <Property Name="EventDetails" Type="TempFoodStallEDM.EventDetails" Nullable="false" />
+          <Property Name="StallDetails" Type="TempFoodStallEDM.StallDetails" Nullable="false" />
+          <Property Name="ApplicantDetails" Type="TempFoodStallEDM.ApplicantDetails" Nullable="false" />
+          <Property Name="StallType" Type="String" Nullable="true" />
+          <Property Name="FoodDetails" Type="TempFoodStallEDM.FoodDetails" Nullable="false" />
+          <Property Name="HowFoodsKeptCold" Type="String" Nullable="true" />
+          <Property Name="HowFoodsKeptHot" Type="String" Nullable="true" />
+          <Property Name="HandwashFacilities" Type="String" Nullable="true" />
+          <NavigationProperty Name="FoodEvent" Relationship="TempFoodStallEDM.FoodEventApplication" FromRole="Application" ToRole="FoodEvent" />
+          <NavigationProperty Name="ProcessApplication" Relationship="TempFoodStallEDM.ApplicationProcessApplication" FromRole="Application" ToRole="ProcessApplication" />
+        </EntityType>
+        <ComplexType Name="EventDetails">
+          <Property Type="String" Name="EventName" Nullable="true" />
+          <Property Type="String" Name="EventLocation" Nullable="true" />
+          <Property Type="String" Name="EventDescription" Nullable="true" />
+          <Property Type="DateTime" Name="EventStartDate" Nullable="true" />
+          <Property Type="String" Name="OtherEventDates" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="StallDetails">
+          <Property Type="String" Name="StallBusinessName" Nullable="true" />
+          <Property Type="String" Name="StallStartTime" Nullable="true" />
+          <Property Type="String" Name="StallFinishTime" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ApplicantDetails">
+          <Property Type="String" Name="ApplicantName" Nullable="true" />
+          <Property Type="String" Name="ApplicantPhoneNumber" Nullable="true" />
+          <Property Type="String" Name="ApplicantEmail" Nullable="true" />
+          <Property Type="String" Name="ApplicantPostalAddress" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FoodDetails">
+          <Property Type="String" Name="FoodDetailsTypeOfFood" Nullable="true" />
+          <Property Type="String" Name="FoodDetailsWhereStoredPrior" Nullable="true" />
+          <Property Type="String" Name="FoodDetailsFoodsPreparedOffSite" Nullable="true" />
+          <Property Type="String" Name="FoodDetailsFoodsPreparedOnSite" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="FoodEvent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" Nullable="false" />
+          <Property Name="EventStartDate" Type="String" Nullable="false" />
+          <Property Name="EventEndDate" Type="String" Nullable="true" />
+          <NavigationProperty Name="Applications" Relationship="TempFoodStallEDM.FoodEventApplication" FromRole="FoodEvent" ToRole="Application" />
+        </EntityType>
+        <Association Name="FoodEventApplication">
+          <End Type="TempFoodStallEDM.FoodEvent" Role="FoodEvent" Multiplicity="0..1" />
+          <End Type="TempFoodStallEDM.Application" Role="Application" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ProcessApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="String" Nullable="true" />
+          <Property Name="PaymentRecieved" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="PaymentReceivedDescription" Type="String" Nullable="true" />
+          <Property Name="PaymentLastCheckedDate" Type="DateTime" Precision="3" Nullable="true" />
+          <Property Name="CanIssueCertificate" Type="Boolean" DefaultValue="True" Nullable="false" />
+          <Property Name="CertificateIssuedDate" Type="DateTime" Precision="3" Nullable="true" />
+          <Property Name="AmountDue" Type="Decimal" Precision="18" Scale="0" Nullable="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="InspectionRequired" Type="String" Nullable="true"   />
+          <Property Name="ReceiptNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="ReminderNotes" Type="String" Nullable="true" />
+          <Property Name="ReminderSent" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="Application" Relationship="TempFoodStallEDM.ApplicationProcessApplication" FromRole="ProcessApplication" ToRole="Application" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" DefaultValue="False" />
+          <Property Name="NotificationSentDate" Type="DateTime" Nullable="true" />
+          <Property Name="NotificationApproved" Type="Boolean" Nullable="true" />
+        </EntityType>
+        <Association Name="ApplicationProcessApplication">
+          <End Type="TempFoodStallEDM.Application" Role="Application" Multiplicity="1" />
+          <End Type="TempFoodStallEDM.ProcessApplication" Role="ProcessApplication" Multiplicity="0..1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TempFoodStallEDMStoreContainer" CdmEntityContainer="TempFoodStallEDMContainer">
+    <EntitySetMapping Name="Applications">
+      <EntityTypeMapping TypeName="IsTypeOf(TempFoodStallEDM.Application)">
+        <MappingFragment StoreEntitySet="Applications">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppID" ColumnName="AppID" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+          <ComplexProperty Name="EventDetails" TypeName="TempFoodStallEDM.EventDetails">
+            <ScalarProperty Name="EventName" ColumnName="EventDetails_EventName" />
+            <ScalarProperty Name="EventLocation" ColumnName="EventDetails_EventLocation" />
+            <ScalarProperty Name="EventDescription" ColumnName="EventDetails_EventDescription" />
+            <ScalarProperty Name="EventStartDate" ColumnName="EventDetails_EventStartDate" />
+            <ScalarProperty Name="OtherEventDates" ColumnName="EventDetails_OtherEventDates" />
+          </ComplexProperty>
+          <ComplexProperty Name="StallDetails" TypeName="TempFoodStallEDM.StallDetails">
+            <ScalarProperty Name="StallBusinessName" ColumnName="StallDetails_StallBusinessName" />
+            <ScalarProperty Name="StallStartTime" ColumnName="StallDetails_StallStartTime" />
+            <ScalarProperty Name="StallFinishTime" ColumnName="StallDetails_StallFinishTime" />
+          </ComplexProperty>
+          <ComplexProperty Name="ApplicantDetails" TypeName="TempFoodStallEDM.ApplicantDetails">
+            <ScalarProperty Name="ApplicantName" ColumnName="ApplicantDetails_ApplicantName" />
+            <ScalarProperty Name="ApplicantPhoneNumber" ColumnName="ApplicantDetails_ApplicantPhoneNumber" />
+            <ScalarProperty Name="ApplicantEmail" ColumnName="ApplicantDetails_ApplicantEmail" />
+            <ScalarProperty Name="ApplicantPostalAddress" ColumnName="ApplicantDetails_ApplicantPostalAddress" />
+          </ComplexProperty>
+          <ScalarProperty Name="StallType" ColumnName="StallType" />
+          <ComplexProperty Name="FoodDetails" TypeName="TempFoodStallEDM.FoodDetails">
+            <ScalarProperty Name="FoodDetailsTypeOfFood" ColumnName="FoodDetails_FoodDetailsTypeOfFood" />
+            <ScalarProperty Name="FoodDetailsWhereStoredPrior" ColumnName="FoodDetails_FoodDetailsWhereStoredPrior" />
+            <ScalarProperty Name="FoodDetailsFoodsPreparedOffSite" ColumnName="FoodDetails_FoodDetailsFoodsPreparedOffSite" />
+            <ScalarProperty Name="FoodDetailsFoodsPreparedOnSite" ColumnName="FoodDetails_FoodDetailsFoodsPreparedOnSite" />
+          </ComplexProperty>
+          <ScalarProperty Name="HowFoodsKeptCold" ColumnName="HowFoodsKeptCold" />
+          <ScalarProperty Name="HowFoodsKeptHot" ColumnName="HowFoodsKeptHot" />
+          <ScalarProperty Name="HandwashFacilities" ColumnName="HandwashFacilities" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FoodEvents">
+      <EntityTypeMapping TypeName="IsTypeOf(TempFoodStallEDM.FoodEvent)">
+        <MappingFragment StoreEntitySet="FoodEvents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventStartDate" ColumnName="EventStartDate" />
+          <ScalarProperty Name="EventEndDate" ColumnName="EventEndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcessApplications">
+      <EntityTypeMapping TypeName="IsTypeOf(TempFoodStallEDM.ProcessApplication)">
+        <MappingFragment StoreEntitySet="ProcessApplications">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="PaymentRecieved" ColumnName="PaymentRecieved" />
+          <ScalarProperty Name="PaymentReceivedDescription" ColumnName="PaymentReceivedDescription" />
+          <ScalarProperty Name="PaymentLastCheckedDate" ColumnName="PaymentLastCheckedDate" />
+          <ScalarProperty Name="CanIssueCertificate" ColumnName="CanIssueCertificate" />
+          <ScalarProperty Name="CertificateIssuedDate" ColumnName="CertificateIssuedDate" />
+          <ScalarProperty Name="AmountDue" ColumnName="AmountDue" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="InspectionRequired" ColumnName="InspectionRequired" />
+          <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+          <ScalarProperty Name="ReminderNotes" ColumnName="ReminderNotes" />
+          <ScalarProperty Name="ReminderSent" ColumnName="ReminderSent" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="NotificationSentDate" ColumnName="NotificationSentDate" />
+          <ScalarProperty Name="NotificationApproved" ColumnName="NotificationApproved" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FoodEventApplication" TypeName="TempFoodStallEDM.FoodEventApplication" StoreEntitySet="Applications">
+      <EndProperty Name="FoodEvent">
+        <ScalarProperty Name="Id" ColumnName="FoodEvent_Id" />
+      </EndProperty>
+      <EndProperty Name="Application">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="FoodEvent_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ApplicationProcessApplication" TypeName="TempFoodStallEDM.ApplicationProcessApplication" StoreEntitySet="ProcessApplications">
+      <EndProperty Name="Application">
+        <ScalarProperty Name="Id" ColumnName="Application_Id" />
+      </EndProperty>
+      <EndProperty Name="ProcessApplication">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

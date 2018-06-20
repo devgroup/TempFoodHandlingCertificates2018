@@ -1,0 +1,175 @@
+﻿@model TempFoodHandlingCertificates2014.Areas.Enquiry.ViewModels.vmSearchApplication
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search for Temp Food Handling Application</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal table-bordered" style="border: 2px solid #73AD21; border-radius: 30px; padding:10px;">
+        <h4 style="color:#73AD21;">Enter Search Parameters</h4>
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.NameSearch, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.NameSearch, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NameSearch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventNameSearch, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.EventNameSearch, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventNameSearch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoodTypeSearch, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.FoodTypeSearch, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FoodTypeSearch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicationSubmittedSearchDateFrom, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-2">
+               
+                @Html.EditorFor(model => model.ApplicationSubmittedSearchDateFrom, new { htmlAttributes = new { @readonly="readonly",  @class = "form-control date-control", @style= "display:inline-block; cursor:pointer" } })
+                @Html.ValidationMessageFor(model => model.ApplicationSubmittedSearchDateFrom, "", new { @class = "text-danger" })
+               
+                <img src="~/Content/images/delete-text.png" width="30" style="display:inline-block" onclick="jsClearDateField('#ApplicationSubmittedSearchDateFrom');" />
+            </div>
+            <div class="col-md-1 control-label" style="text-align:center" >
+                <label>to</label>
+            </div>
+            <div class="col-md-3" >
+                
+                @Html.EditorFor(model => model.ApplicationSubmittedSearchDateTo, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control date-control", @style = "display:inline-block; cursor:pointer" } })
+                @Html.ValidationMessageFor(model => model.ApplicationSubmittedSearchDateTo, "", new {  @class = "text-danger" })
+                <img src="~/Content/images/delete-text.png" width="30" style="display:inline-block" onclick="jsClearDateField('#ApplicationSubmittedSearchDateTo');" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StallSearchDateFrom, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-2">
+
+                @Html.EditorFor(model => model.StallSearchDateFrom, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control date-control", @style = "display:inline-block; cursor:pointer" } })
+                @Html.ValidationMessageFor(model => model.StallSearchDateFrom, "", new { @class = "text-danger" })
+
+                <img src="~/Content/images/delete-text.png" width="30" style="display:inline-block" onclick="jsClearDateField('#StallSearchDateFrom');" />
+            </div>
+            <div class="col-md-1 control-label" style="text-align:center">
+                <label>to</label>
+            </div>
+            <div class="col-md-3">
+
+                @Html.EditorFor(model => model.StallSearchDateTo, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control date-control", @style = "display:inline-block; cursor:pointer" } })
+                @Html.ValidationMessageFor(model => model.StallSearchDateTo, "", new { @class = "text-danger" })
+                <img src="~/Content/images/delete-text.png" width="30" style="display:inline-block" onclick="jsClearDateField('#StallSearchDateTo');" />
+            </div>
+        </div>
+       
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.StallSearchDateFrom, htmlAttributes: new { @class = "control-label col-md-3" })
+            
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.StallSearchDateFrom, new { htmlAttributes = new { @class = "form-control date-control" } })
+                @Html.ValidationMessageFor(model => model.StallSearchDateFrom, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-1">
+                to
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.StallSearchDateTo, new { htmlAttributes = new { @class = "form-control date-control" } })
+                @Html.ValidationMessageFor(model => model.StallSearchDateTo, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+
+            @{
+                    if (User.Identity.Name.ToLower() == "health@hobartcity.com.au")
+                    {
+                    <div class="col-md-2">
+                       
+                       @*@Html.ActionLink("Administer Certificates", "Index","Certificates", new {area = "Admin" })*@
+                       @Html.ActionLink("Administer Certificates", "Index", "Certificate", new { area = "Admin" }, new { @class = "zznavbar-brand" })
+
+                    </div>
+                }
+            }
+           
+
+        </div>
+    </div>
+}
+
+    @Html.DisplayFor(model => model.ApplicationList, "ApplicationList")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryui")*@
+
+
+
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //var x = $("#ApplicationSubmittedSearchDateFrom").val();
+           
+            $("#ApplicationSubmittedSearchDateFrom").datepicker({
+                dateFormat: "dd-M-yy"
+            });
+
+            $("#ApplicationSubmittedSearchDateTo").datepicker({
+                dateFormat: "dd-M-yy"
+            });
+
+            $("#StallSearchDateFrom").datepicker({
+                dateFormat: "dd-M-yy"
+            });
+
+            $("#StallSearchDateTo").datepicker({
+                dateFormat: "dd-M-yy"
+            });
+            
+            //alert($("#ApplicationSubmittedSearchDateFrom").val());
+            //Format date on page load
+            if (($("#ApplicationSubmittedSearchDateFrom").val() !== ""))
+            {
+                
+                var dateValue = $("#ApplicationSubmittedSearchDateFrom").val();
+               
+                $("#ApplicationSubmittedSearchDateFrom").val($.datepicker.formatDate("dd-M-yy", new Date(dateValue)));
+               
+            }
+            
+        });
+        
+
+        function jsClearDateField(dateField)
+        {
+          
+            $(dateField).val('');
+        }
+       // $("#ApplicationSubmittedSearchDateFrom").datepicker();
+
+    </script>
+}

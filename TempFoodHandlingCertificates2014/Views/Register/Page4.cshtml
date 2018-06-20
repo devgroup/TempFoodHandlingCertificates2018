@@ -1,0 +1,68 @@
+﻿@model TempFoodHandlingCertificates2014.ViewModels.vmPage4
+
+@{
+    ViewBag.Title = "Page 4. Temporary Food Stall Application";
+}
+<div class="myPageTitle">Registration Page 4 of 5</div>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <h3>Handwash Facilities</h3>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <img src="~/Content/images/HandWashing.png" style="border:2px solid black" />
+            </div>
+
+            <div class="col-md-4">
+                Hand wash facilities must have warm running water, soap and paper towel as shown in picture or equivalent.
+                Hand sanitiser alone is not acceptable.
+                Application will not be approved unless hand was facilities are provided.
+                (Exemption for those selling ONLY pre-packaged foods.)
+            </div>
+        </div>
+
+       
+      
+        
+
+
+            <div class="form-group">
+              
+                <div class="col-md-9">
+
+                    @{
+                    string radioOption1 = "My hand wash facilities resemble the above picture";
+                    string radioOption2 = "I am selling pre-packaged foods with no tasters";
+                    }
+
+                    @Html.RadioButtonFor(model => model.HandwashFacilities,radioOption1, new {id="opt1"})
+                    @Html.Label(radioOption1, new { @for = "opt1" })
+                    <br />
+                    @Html.RadioButtonFor(model => model.HandwashFacilities, radioOption2, new { id = "opt2" })
+                    @Html.Label(radioOption2, new { @for = "opt2" })
+
+                    <p>
+                        @Html.ValidationMessageFor(model => model.HandwashFacilities, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+            </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input name="submit" id="prev" type="submit" value="&laquo; Prev" class="btn btn-primary" />
+                <span>Page 4 of 5</span>
+                <input name="submit" id="next" type="submit" value="Next &raquo;" class="btn btn-primary" />
+            </div>
+        </div>
+
+        </div>
+}
+

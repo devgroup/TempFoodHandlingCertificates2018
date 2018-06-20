@@ -1,0 +1,71 @@
+﻿@model TempFoodHandlingCertificates2014.Areas.Admin.ViewModels.vmProcessApplication
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Process Application</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+       @*The id is @Html.DisplayFor(model => model.Id) <br />
+       The AppId is @Html.DisplayFor(model => model.AppId)*@
+       
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.AppId)
+
+       
+        @Html.DisplayFor(model => model.Application)
+        <p></p>
+        <div class="myHeading h4">
+            Administration by Health Officers
+        </div>
+        @Html.EditorFor(model => model.ProcessApplication)
+
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+} @*end form*@
+
+<div>
+    @*@Html.ActionLink("Back to Process Applications", "Index")*@
+    @Html.ActionLink("Cancel", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+  <script type="text/javascript">
+      
+
+      $(document).ready(function () {
+          $("#ProcessApplication_PaymentRecieved").click(function () {
+              
+              if ($("#ProcessApplication_PaymentRecieved").is(":checked"))
+              
+              {
+                  $("#ProcessApplication_CanIssueCertificate").val('true');
+              } 
+                else
+              {
+                  $("#ProcessApplication_CanIssueCertificate").val('false');
+              }
+          });
+
+      });
+
+      
+</script>
+}

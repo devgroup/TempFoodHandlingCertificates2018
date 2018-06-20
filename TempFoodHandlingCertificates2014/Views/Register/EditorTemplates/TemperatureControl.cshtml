@@ -1,0 +1,78 @@
+﻿@model TempFoodHandlingCertificates2014.ViewModels.TemperatureControl
+
+<h3>Temperature Control</h3>
+
+<div class="form-group">
+    <div class="zzcol-md-offset-2 col-md-10">
+        <img src="~/Content/images/TemperatureControl.png" style="border:2px solid black" />
+    </div>
+</div>
+
+<h4>Cold Foods</h4>
+
+@{
+    //Provide a list for the radio button group.
+    List<string> ColdFoodList = new List<string>()
+     {
+         "Eski with ice",
+         "Refrigerated unit",
+         "Chilled display unit",
+         "Documented 2 hr 4 hr rule",
+         "I am selling only non potentially hazardous foods.  ie biscuits / jam / bread / cake not containing cream."
+     };
+
+    List<string> HotFoodList = new List<string>()
+    {
+        "Use heated cabinet",
+        "Use bain marie",
+        "Foods to be served immediately following cooking",
+        "I am not selling hot food"
+    };
+}
+
+<div class="form-group">
+    @Html.LabelFor(model => model.HowFoodsKeptCold, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @{
+            //Write out the list of radio buttons from above
+            foreach (var item in ColdFoodList.Select((listitem, listindex) => new { listitem, listindex }))
+            {
+                string id = string.Concat("rbHowFoodsKeptCold_", item.listindex.ToString());
+                <div class="col-md-9 radio">
+                    @Html.RadioButtonFor(model => model.HowFoodsKeptCold, item.listitem, new { @id = id })
+                    @Html.LabelFor(model => model.HowFoodsKeptCold, item.listitem, new { @for = id})
+                   
+                </div>
+            
+            }
+        }
+        @Html.ValidationMessageFor(model => model.HowFoodsKeptCold, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+
+
+<h4>Hot foods</h4>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.HowFoodsKeptHot, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+      
+        @{
+            //Write out the list of radio buttons from above
+            foreach (var item in HotFoodList.Select((listitem, listindex) => new { listitem, listindex }))
+            {
+                string id = string.Concat("rbHowFoodsKeptHot_", item.listindex.ToString());
+                <div class="col-md-9 radio">
+                    @Html.RadioButtonFor(model => model.HowFoodsKeptHot, item.listitem, new { @id = id })
+                    @Html.LabelFor(model => model.HowFoodsKeptHot, item.listitem, new { @for = id })
+
+                </div>
+
+            }
+        }
+
+        @Html.ValidationMessageFor(model => model.HowFoodsKeptHot, "", new { @class = "text-danger" })
+    </div>
+</div>
+

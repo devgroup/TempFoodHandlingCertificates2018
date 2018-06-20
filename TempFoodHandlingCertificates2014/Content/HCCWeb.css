@@ -1,0 +1,226 @@
+﻿body
+{
+   	margin:0;
+	padding:0;
+}
+
+.blueFont {
+    color:darkblue;
+    background-color:red;
+}
+
+#banner
+{
+    /*background-image:#2A7DA5;*/
+    height:380px;
+    width:100%;
+    background-image:url("http://www.hobartcity.com.au/files/0/37/header-home-20.gif");
+    background-position:50% 0;
+}
+
+#logo
+{
+    background-image:url("http://www.hobartcity.com.au/files/0/37/logo-hcc-reverse-blue.png");
+    display:block;
+    height:100px;
+    width:79px;
+    position:absolute;
+    left:50%;
+    top:25px;
+    margin-left:-470px;
+}
+
+#logotype
+{
+    display:block;
+    height:19px;
+    width:301px;
+    position:absolute;
+    left:50%;
+    top:75px;
+    margin-left:110px;
+    background-image:url("http://www.hobartcity.com.au/files/0/37/logo-hcc-type-reverse.png");
+    background-repeat:no-repeat;
+}
+
+#wrapper
+{
+    position:relative;
+    width:950px;
+    left:50%;
+    margin-left:-470px;
+    margin-top:-240px;
+    background-color:White;
+    border:1px solid #185D88;
+}
+
+#title
+{
+    background-color:#185D88;
+    width:100%;
+    font-size:20px;
+    color:White;
+    text-align:center;
+    padding:4px 0;
+}
+
+#form
+{
+    padding:10px;
+}
+
+#quicklinks
+{
+    list-style-type:none;
+    margin:0;
+    padding:0 0 1em;
+    position:absolute;
+    left:50%;
+    margin-left:269px;
+    top:0;
+}
+
+#quicklinks li
+{
+    float:left;
+    line-height:1;
+    padding:0;
+}
+
+#quicklinks a:link, #quicklinks a:visited
+{
+    color:#FFFFFF;
+    text-decoration:none;
+}
+
+#quicklinks a {
+    display:block;
+    padding:10px;
+    font-family:arial,helvetica,sans-serif;
+    font-size:13px;
+}
+
+#quicklinks a:focus, #quicklinks a:hover, #quicklinks a:active {
+    background:url("http://www.hobartcity.com.au/files/0/37/quicklinks-blue.png");
+    color:#FFFFFF;
+    text-decoration:none;
+}
+
+#footer
+{
+    background-image:url("http://www.hobartcity.com.au/files/0/37/footer-gradient-green.gif");
+    background-position:50% 0;
+    background-color:#669900;
+    background-repeat:no-repeat;
+    height:110px;
+    width:100%;
+    margin-top:20px;
+    color:White;
+    font-size:12px;
+}
+
+#footer-inner
+{
+    width:960px;
+    position:relative;
+    left:50%;
+    margin-left:-480px;
+}
+
+#footer h2
+{
+    font-size:12px;
+    padding:0;
+    margin:10px 0 0 0;
+}
+
+#footer p
+{
+    padding:0;
+    margin:0;
+}
+
+#footer .col1,
+#footer .col2
+{
+    float:left;
+    width:300px;
+    padding:0 10px;
+}
+
+#footer #cqms a
+{
+    background-image:url("http://www.hobartcity.com.au/files/0/37/logo-cqms-reverse-green.gif");
+    display:block;
+    height:78px;
+    width:55px;
+    background-repeat:no-repeat;
+    position:absolute;
+    right:210px;
+    top:15px;
+}
+
+#footer #abea a
+{
+    background-image:url("http://www.hobartcity.com.au/files/0/37/logo-abea-reverse-green.gif");
+    display:block;
+    height:78px;
+    width:48px;
+    background-repeat:no-repeat;
+    position:absolute;
+    right:275px;
+    top:15px;
+}
+
+#footer2
+{
+    background-color:#669900;
+    overflow:hidden;
+}
+
+#footer2 ul.links
+{
+    background-color: #477A00;
+    list-style-type: none;
+    padding: 10px 10px 10px 3px;
+    width:100%;
+    position:relative;
+    left:50%;
+    margin:25px 0 0 -480px;
+    height:20px;
+}
+
+#footer2 ul.links li
+{
+    float: left;
+    padding: 0 8px 0 7px;
+    background-image:url("http://www.hobartcity.com.au/files/0/37/footer-divider.gif");
+    background-repeat:no-repeat;
+    background-position:0 50%;
+}
+
+#footer2 ul.links li:first-child
+{
+    background-image:none;
+}
+
+#footer2 ul.links li a,
+#footer2 ul.links li a:link,
+#footer2 ul.links li a:visited
+{
+    color:white;
+    text-decoration:none;
+}
+
+#footer2 ul.links li a:hover
+{
+    text-decoration:underline;
+}
+
+#startoverlink,
+#startoverlink:active,
+#startoverlink:visited,
+#startoverlink:hover
+{
+    color:White;
+}

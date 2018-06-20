@@ -1,0 +1,42 @@
+﻿@model TempFoodHandlingCertificates2014.Models.FoodDetails
+
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Food Details</h4>
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoodDetailsTypeOfFood, htmlAttributes: new { @class = "col-md-10" })
+            <div class="col-md-9">
+                @Html.TextAreaFor(model => model.FoodDetailsTypeOfFood)
+                @Html.ValidationMessageFor(model => model.FoodDetailsTypeOfFood, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoodDetailsWhereStoredPrior, htmlAttributes: new { @class = "col-md-10" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.FoodDetailsWhereStoredPrior, new  { @rows=5, @cols=50 })
+                @Html.ValidationMessageFor(model => model.FoodDetailsWhereStoredPrior, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoodDetailsFoodsPreparedOffSite, htmlAttributes: new { @class = "col-md-10" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.FoodDetailsFoodsPreparedOffSite)
+                @Html.ValidationMessageFor(model => model.FoodDetailsFoodsPreparedOffSite, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoodDetailsFoodsPreparedOnSite, htmlAttributes: new { @class = "col-md-10" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.FoodDetailsFoodsPreparedOnSite)
+                @Html.ValidationMessageFor(model => model.FoodDetailsFoodsPreparedOnSite, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+

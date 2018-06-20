@@ -1,0 +1,19 @@
+﻿@model System.Data.Entity.Validation.DbEntityValidationException
+
+<h4>DbEntityValidationException</h4>
+ <hr />
+    
+    @{ 
+
+        foreach (var item in Model.EntityValidationErrors)
+        {
+
+            <h2>Validation error</h2>
+
+            // @Html.DisplayFor(modelItem => item.ValidationErrors, "~/Views/Shared/_DbValidationErrors");
+           @Html.Partial("_DbValidationErrors", item.ValidationErrors)
+          //  @Html.DisplayFor("_DbValidationErrors", modelItem => item.ValidationErrors);
+
+        }
+    }
+    

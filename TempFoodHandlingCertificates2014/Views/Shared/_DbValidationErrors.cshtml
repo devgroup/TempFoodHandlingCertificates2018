@@ -1,0 +1,28 @@
+﻿@model IEnumerable<System.Data.Entity.Validation.DbValidationError>
+
+<h4>Db Validation Errors</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Name of Property
+        </th>
+        <th>
+           Error Message
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PropertyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ErrorMessage)
+        </td>
+        
+    </tr>
+}
+
+</table>

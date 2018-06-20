@@ -1,0 +1,61 @@
+﻿@model TempFoodHandlingCertificates2014.ViewModels.vmPage2
+
+@{
+    ViewBag.Title = "Page 2. Temporary Food Stall Application";
+}
+<div class="myPageTitle">Registration Page 2 of 5</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+            <div class="form-group">
+                
+                <span style="font-size:18px;" class="col-md-2">
+                Type of stall
+                </span>
+               
+                <div class= "col-md-offset-2 col-md-9">
+                    @Html.RadioButtonFor(model => model.StallType, "Commercial food business", new { id = "rbStallTypeCommercial" })
+                    @Html.LabelFor(model => model.StallType, "Commercial food business", new { @for = "rbStallTypeCommercial" })
+                </div>
+                <div class="col-md-offset-2 col-md-9">
+                    @Html.RadioButtonFor(model => model.StallType, "Charity / fundraising stall", new { id = "rbStallTypeCharity" })
+                    @Html.LabelFor(model => model.StallType, "Charity / fundraising stall", new { @for = "rbStallTypeCharity" })
+                </div>
+
+              
+
+
+
+                <div class="col-md-9">
+                    @Html.ValidationMessageFor(model => model.StallType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.FoodDetails, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FoodDetails, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input name="submit" id ="prev" type="submit" value="&laquo; Prev" class="btn btn-primary" />
+                <span>Page 2 of 5</span>
+                <input name="submit" id="next" type="submit" value="Next &raquo;" class="btn btn-primary" />
+            </div>
+        </div>
+   
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

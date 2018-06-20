@@ -1,0 +1,517 @@
+﻿@model IEnumerable<TempFoodHandlingCertificates2014.Models.Application>
+
+@{
+    ViewBag.Title = "Manage certificates";
+}
+
+
+@helper DisplayYes(string href_actual = "", string href_display = "")
+{
+    <span class="glyphicon glyphicon-thumbs-up lblGreen">
+
+        @if (href_actual == "")
+        {
+            @:Yes
+        }
+        else
+        {
+            <input type="submit" value="@href_display" name="submit" class="fakelink" onclick="swap('@href_actual')" />
+        }
+    </span>
+}
+
+@helper DisplayNo(string href_actual = "", string href_display = "")
+{
+    <span class="glyphicon glyphicon-thumbs-down lblRed">
+        @if (href_actual == "")
+        {
+            @:No
+           
+        }
+        else
+        {
+            href_display = HttpUtility.HtmlEncode(href_display);
+            <input type="submit" value="@href_display" name="submit" class="fakelink" onclick="swap('@href_actual');" />
+           
+        }
+
+
+    </span>
+}
+
+
+
+@helper DisplayMaybe(string href_actual = "", string href_display = "")
+{
+    <span class="lblOrange">
+
+        @if (href_actual == "")
+        {
+            @:Yes
+        }
+        else
+        {
+            <input type="submit" value="@href_display" name="submit" class="fakelink" onclick="swap('@href_actual')" />
+        }
+    </span>
+}
+
+@helper DisplayFakeLink(string href_actual, string href_display)
+{
+    <input type="submit"
+           value="@href_display"
+           name="submit" class="fakelink"
+           onclick="swap('@href_actual');" />
+
+}
+
+<!-- Display undecided for inspections  -->
+@helper DisplayUndecided(string itemId)
+{
+    @:UNDECIDED <br />
+            //Now display 3 hyperlinks
+//inspect values are Green, Red and No
+    @DisplayFakeLink(String.Concat("Inspection", "Green", itemId), "G");
+    @DisplayFakeLink(String.Concat("Inspection", "Red", itemId), "R");
+    @DisplayFakeLink(String.Concat("Inspection", "NotRequired", itemId), "N");
+
+
+}
+
+
+
+<div>Acc: HC25107102204000</div>
+
+@using (Html.BeginForm())
+{
+
+
+    <input type="hidden" id="application_action" name="application_action" value="NOACTION 0" />
+    <script type="text/javascript">
+        function swap(href_actual) {
+            var app_action = document.getElementById("application_action");
+            app_action.value = href_actual;
+            return true;
+        }
+    </script>
+
+    @Html.Partial("_FilterCertificates", (TempFoodHandlingCertificates2014.Areas.Admin.ViewModels.vmFilterCertificates)ViewBag.FilterCertificates)
+
+
+
+    if (Model.Count() == 0)
+    {
+        <h3>
+            No results found.
+        </h3>
+
+    }
+    else
+    {
+
+        <h2>Results</h2>
+        <table class="table">
+
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+
+                    @Html.DisplayName("Applicant name")
+
+                </th>
+                <th>
+                    @Html.DisplayName("Stall business name")
+                </th>
+                <th>
+                    @Html.DisplayName("Event name")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubmittedDate)
+                </th>
+                <th>
+                    @Html.DisplayName("Event date")
+                </th>
+                <th>
+                    @Html.DisplayName("Reminder Sent")
+                </th>
+                <th>
+                    @Html.DisplayName("Payment Received")
+                </th>
+                <th>
+                    @Html.DisplayName("Certificate Issued")
+                </th>
+                <th>
+                    @Html.DisplayName("Inspection Required")
+
+
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.AppID.ToString(), "Edit", new { id = item.AppID })
+                    </td>
+
+                    <td>
+                        <a href="mailto: @item.ApplicantDetails.ApplicantEmail">@item.ApplicantDetails.ApplicantName</a>
+                        <br />
+                        Ph: @Html.DisplayFor(modelItem => item.ApplicantDetails.ApplicantPhoneNumber)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StallDetails.StallBusinessName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventDetails.EventName)
+                        <br />
+                        <em>Location: </em>@Html.DisplayFor(modelItem => item.EventDetails.EventLocation)
+                    </td>
+
+                    <td>
+                        @{
+                            string submittedDate = string.Empty;
+                            TimeSpan elapsed = new TimeSpan();
+                            if (item.SubmittedDate.HasValue)
+                            {
+                                submittedDate = item.SubmittedDate.Value.ToShortDateString();
+                                elapsed = DateTime.Now.Subtract(item.SubmittedDate.Value);
+
+                            }
+                        }
+                        @submittedDate
+
+                        <br />
+                        @{
+                            if (elapsed.Days == 0)
+                            {
+                                @:Today
+                            }
+                            else if (elapsed.Days == 1)
+                            {
+                                @:Yesterday
+                            }
+                            else
+                            {
+                                //Request - remove days ago.
+                                @*@elapsed.Days @:days ago*@
+                            }
+                        }
+
+                    </td>
+
+                    <td>
+                       
+                        @{
+                            string eventDate = String.Empty;
+                            //TimeSpan daysInFuture = new TimeSpan(days: 0, hours: 0, minutes: 0, seconds: 0);
+                            int daysInFuture = 0;
+
+                            if (item.EventDetails.EventStartDate.HasValue)
+                            {
+                                eventDate = item.EventDetails.EventStartDate.Value.ToShortDateString();
+                                daysInFuture = item.EventDetails.EventStartDate.Value.Date.Subtract(DateTime.Now.Date).Days;
+
+                                //eventDate = item.EventDetails.EventStartDate.ToShortDateString();
+                                //daysInFuture = item.EventDetails.EventStartDate.Date.Subtract(DateTime.Now.Date).Days;
+                            }
+                        }
+                        @eventDate
+                        <br />
+                        @{
+                            if (daysInFuture == 0)
+                            {
+                                <span class="lblGreen">Today</span>
+                            }
+                            else if (daysInFuture < 0)
+                            {
+                                if (daysInFuture == -1)
+                                {
+                                    <span class="lblRed">Yesterday!</span>
+                                }
+                                //When certificate has been issued, don't show days to go if the days
+                                //to go is in the past.
+                                else if
+                                ((item.ProcessApplication == null) ||
+                                (item.ProcessApplication.CertificateIssuedDate == null))
+                                {
+                                    <span class="lblRed">@Math.Abs(daysInFuture) days ago</span>
+                                }
+
+                            }
+                            else
+                            {
+                                if (daysInFuture == 1)
+                                {
+                                    <span class="lblGreen">Tomorrow!</span>
+                                }
+                                else
+                                {
+                                    <span class="lblGreen">@daysInFuture days to go</span>
+                                }
+                            }
+                        }
+                      
+                    </td>
+
+                    @*Display reminder sent column*@
+                    <td style="max-width: 5em;">
+                       
+                        @{
+                            if (item.ProcessApplication == null)
+                            {
+                                //No reminder has been sent out
+                                @DisplayNo("Issue reminder " + @item.AppID.ToString(), "Send");
+                            }
+                            else
+                            {
+                                if (item.ProcessApplication.ReminderSent.HasValue)
+                                {
+                                    @DisplayYes("Revoke reminder " + @item.AppID, "Yes");
+                                    <br />
+                                    @item.ProcessApplication.ReminderSent.Value.ToShortDateString();
+
+                                }
+                                else if (item.ProcessApplication.PaymentRecieved)
+                                { //If payment recieved and no reminders sent out, display n/a
+                                    @DisplayNo("Issue reminder " + @item.AppID, "N/A");
+                                }
+                                else
+                                {
+                                    <span style="font-size:16px;">
+                                        @*@DisplayNo("Issue reminder " + @item.AppID, "Send reminder");*@
+                                       @DisplayNo(href_actual: "Issue reminder " + @item.AppID.ToString(),  href_display: "Send")
+                                    
+                                    </span>
+                                  
+                                }
+
+                            }
+                        }
+                     
+
+                    </td>
+
+
+
+                    @*Display payment received column*@
+                    <td>
+
+                    
+                        @{
+                            //string submitValuePayment = String.Empty;
+                            //string displayValuePayment = String.Empty;
+
+
+                            if ((item.ProcessApplication == null) || (!item.ProcessApplication.PaymentRecieved))
+                            // .HasValue))
+                            //if ((item.ProcessApplication == null)
+                            //    || (String.IsNullOrWhiteSpace(item.ProcessApplication.PaymentReceivedDescription))
+                            //    || (item.ProcessApplication.PaymentReceivedDescription == "No")
+                            //    )
+
+                            {
+                                //displayValuePayment = "No";
+                                //submitValuePayment = "Record payment received for " + @item.AppID;
+                                @DisplayNo("Record payment " + @item.AppID, "No");
+
+
+
+                                if (item.ProcessApplication != null
+                                        && (item.ProcessApplication.PaymentReceivedDescription != null)
+                                        && item.ProcessApplication.PaymentReceivedDescription.Contains("Not"))
+                                {
+                                    <span>Deemed Not Required</span>
+                                }
+                                else
+                                {
+
+                                    //Display not required button
+                                    String displayNotRequired = "Payment not required " + @item.AppID;
+                                    <input type="submit" value="Not Reqd" onclick="swap('@displayNotRequired');" />
+                                }
+
+                            }
+                            //else if (item.ProcessApplication.PaymentRecieved) //.Value)
+                            else if (item.ProcessApplication.PaymentReceivedDescription == "Yes")
+                            {
+                                //displayValuePayment = "Yes";
+                                //submitValuePayment = "Remove payment received for " + @item.AppID;
+                                @DisplayYes("Remove payment " + @item.AppID, "Yes");
+                            }
+                            else
+                            {
+                                @DisplayNo("Record payment " + @item.AppID, "No");
+                            }
+
+                        }
+
+                       
+
+                        @*<b>@displayValuePayment</b>
+                        <input type="submit" value="@submitValuePayment" name="submit" class="fakelink"/>*@
+
+                    </td>
+
+                    @*Display Certificate Issued Column*@
+                    <td>
+
+                      
+                        @{
+                            //This condition added 28 June 2015
+                            if ((item.ProcessApplication != null) &&
+                                (!item.ProcessApplication.CanIssueCertificate))
+                            {
+                                <span>Unable to issue certificate</span>
+                            }
+                            else
+                            {
+
+                                string submitValueCert = String.Empty;
+                                string displayValueCert = String.Empty;
+
+
+                                if (item.ProcessApplication == null || item.ProcessApplication.CertificateIssuedDate == null)
+                                {
+                                    @*@DisplayNo("Email Certificate", "Email Certicate");*@
+                                    
+                                    @DisplayNo();
+
+                                    //Reload the page so that the issue certificate button is hilighted
+                                    @Html.ActionLink("Issue Cert", "IssueCertificate", new { id = item.AppID }, new { @target = "_blank", @onclick = "location.reload();" })
+
+                                    <br />
+                                    @submitValueCert
+
+                                }
+                                else
+                                {
+                                    displayValueCert = item.ProcessApplication.CertificateIssuedDate.Value.Date.ToShortDateString();
+                                    //submitValueCert = "Remove cert issue for " + @item.AppID;
+                                    <div style="font-weight:bold; font-size:larger; background-color:yellow; border:solid 2px black">
+                                        @DisplayYes()
+                                    </div>
+                                    <br />
+                                    //TODO: change to update action
+                                    @Html.ActionLink(displayValueCert, "IssueCertificate", new { id = item.AppID }, new { @target = "_blank" })
+                                    //@displayValueCert
+                                }
+
+                            }
+                        }
+                       
+
+                        @*<b>@displayValueCert</b>
+
+                            <input type="submit" value="@submitValueCert" name="submit" class="fakelink" />*@
+                    </td>
+
+                    @*Indicate whether inspection is required or not.*@
+                    <td>
+                      
+
+                        @{
+                            //Display links for 1. Undecided, 2. Green Tream, 3. Red Team, 4. Not Required
+
+                            if (item.ProcessApplication == null)
+                            {
+                                //This must be undecided.
+
+                                @DisplayUndecided(@item.AppID.ToString());
+                            }
+                            else
+                            {
+                                if (String.IsNullOrWhiteSpace(item.ProcessApplication.InspectionRequired))
+                                {
+
+                                    @DisplayUndecided(@item.AppID.ToString());
+                                }
+                                else if (item.ProcessApplication.InspectionRequired == "Green Team")
+                                {
+                                    @DisplayFakeLink(String.Concat("Inspection", "Undecided", item.AppID), "Green Team");
+                                    //@item.ProcessApplication.InspectionRequired
+                                }
+                                else if (item.ProcessApplication.InspectionRequired == "Red Team")
+                                {
+                                    @DisplayFakeLink(String.Concat("Inspection", "Undecided", item.AppID), "Red Team");
+                                    //@item.ProcessApplication.InspectionRequired
+                                }
+                                else if (item.ProcessApplication.InspectionRequired == "Not Required")
+                                {
+                                    @DisplayFakeLink(String.Concat("Inspection", "Undecided", item.AppID), "Not Required");
+                                    //@item.ProcessApplication.InspectionRequired
+                                }
+                                else
+                                {
+                                    //@:Please check invalid entry -
+                                    //@item.ProcessApplication.InspectionRequired
+                                    //Invalid entry so display undecided
+                                    @DisplayUndecided(@item.AppID.ToString());
+                                }
+
+                            }
+
+                            }
+
+
+                </td>
+            </tr>
+
+
+                        } @*for each*@
+
+                    </table>
+
+
+
+
+                            } @* end else *@
+
+                            } @* end form *@
+
+
+                            @{
+
+                                if (ViewBag.SendEmail != null)
+                                {
+                                    //Use partial form to send mail via javascript.
+
+                                    @*@Html.Partial("_EmailPartial",
+                                        ViewBag.Applicant as TempFoodHandlingCertificates2014.Models.Application);*@
+                                    @Html.Partial("_EmailPartial", (int)ViewBag.ApplicationId);
+                                }
+                            }
+
+
+
+
+                            @section Scripts {
+                                @Scripts.Render("~/bundles/jqueryval")
+                                @Scripts.Render("~/bundles/jqueryui")
+
+
+                                <script type="text/javascript">
+                                    //$(document).ready(
+                                    //    $("$SendReminderLink").click(function () {
+                                    //        alert("link is clicked");
+                                    //    })
+                                    //    );
+
+                                    $(function () {
+                                        $("#SubmittedDateStartSearchStringFormat").datepicker({ dateFormat: "dd-M-yy" });
+                                        $("#SubmittedDateEndSearchStringFormat").datepicker({ dateFormat: "dd-M-yy" });
+                                        $("#EventDateStartSearchStringFormat").datepicker({ dateFormat: "dd-M-yy" });
+                                        $("#EventDateEndSearchStringFormat").datepicker({ dateFormat: "dd-M-yy" });
+                                    });
+
+
+
+
+                                </script>
+                            }

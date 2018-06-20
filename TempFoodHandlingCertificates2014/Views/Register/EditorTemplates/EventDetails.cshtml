@@ -1,0 +1,60 @@
+﻿@model TempFoodHandlingCertificates2014.Models.EventDetails
+
+
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Event Details</h4>
+
+    
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventName, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventLocation, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.EventLocation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventLocation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventDescription, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventStartDate, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.EventStartDateDisplay, new { htmlAttributes = new { @id = "datepicker", @class = "form-control date-control", @readonly="readonly", @style = "display:inline-block; cursor:pointer" } })
+              
+                @Html.ValidationMessageFor(model => model.EventStartDateDisplay, "", new { @class = "text-danger" })
+                <img src="~/Content/images/delete-text.png" width="30" style="display:inline-block" onclick="jsClearDateField('#datepicker');" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OtherEventDates, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.OtherEventDates, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.OtherEventDates, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+    </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   
+}

@@ -1,0 +1,208 @@
+﻿@model TempFoodHandlingCertificates2014.Models.Application
+
+<div style="border: 1px solid grey; border-radius: 6px; padding: 5px; background-color:lightgray;">
+    @Html.HiddenFor(model => model.Id)
+    <div class="row">
+        <div class="col-md-8 h4 myHeading">
+            Details submitted by applicant
+        </div>
+        <div class="col-md-4">
+            @*@Html.ActionLink("Edit Details", "EditApplication", new { Id = Model.Id })*@
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <h4>Application Details</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.AppID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AppID)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.SubmittedDate)
+                </dt>
+
+                <dd>
+                    @{
+                        string submittedDate = Model.SubmittedDate.Value.Date.ToString("dd-MMM-yyyy");
+                    }
+                    @submittedDate
+                </dd>
+                </dl>
+        </div>
+        
+        <div class="col-md-4 col-sm-4">
+            <h4>Applicant Details</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ApplicantDetails.ApplicantName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ApplicantDetails.ApplicantName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ApplicantDetails.ApplicantPhoneNumber)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ApplicantDetails.ApplicantPhoneNumber)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ApplicantDetails.ApplicantEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ApplicantDetails.ApplicantEmail)
+                </dd>
+
+            </dl>
+        </div>
+       
+        <div class="col-md-4 col-sm-4">
+            <h4>Event Details</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.EventDetails.EventName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EventDetails.EventName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EventDetails.EventStartDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EventDetails.EventStartDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EventDetails.OtherEventDates)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EventDetails.OtherEventDates)
+                </dd>
+               
+                <dt>
+                    @Html.DisplayNameFor(model => model.EventDetails.EventDescription)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EventDetails.EventDescription)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EventDetails.EventLocation)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EventDetails.EventLocation)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EventDetails.OtherEventDates)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EventDetails.OtherEventDates)
+                </dd>
+                <dd>
+                    @Html.ActionLink("Update event details", "UpdateEventDetails", new { id = Model.AppID })
+                </dd>
+                
+           </dl>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <h4>Stall Details</h4>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StallDetails.StallBusinessName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StallDetails.StallBusinessName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StallType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StallType)
+                    </dd>
+                    
+                </dl>
+            </div>
+        <div class="col-md-4 col-sm-4">
+            <h4>Food Details</h4>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.HowFoodsKeptCold)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HowFoodsKeptCold)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HowFoodsKeptHot)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HowFoodsKeptHot)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HandwashFacilities)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HandwashFacilities)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <h4>Further Food Details</h4>
+            @*<dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FoodDetails.FoodDetailsTypeOfFood)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodDetails.FoodDetailsTypeOfFood)
+                </dd>
+               </dl>*@
+            @*@Html.DisplayNameFor(model => model.FoodDetails.FoodDetailsTypeOfFood)*@
+            <label>Type of food: </label>
+            @Html.DisplayFor(model => model.FoodDetails.FoodDetailsTypeOfFood)
+            <br />
+            <label>Food prepared off site: </label>
+            
+            @*@Html.DisplayNameFor(model => model.FoodDetails.FoodDetailsFoodsPreparedOffSite)*@
+            @Html.DisplayFor(model => model.FoodDetails.FoodDetailsFoodsPreparedOffSite)
+
+            @*@Html.DisplayNameFor(model => model.FoodDetails.FoodDetailsFoodsPreparedOnSite)*@
+            <br/>
+            <label>Food prepared on site: </label>
+            @Html.DisplayFor(model => model.FoodDetails.FoodDetailsFoodsPreparedOnSite)
+
+                @*<dt>
+                    @Html.DisplayNameFor(model => model.FoodDetails.FoodDetailsFoodsPreparedOffSite)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FoodDetails.FoodDetailsFoodsPreparedOffSite)
+                </dd>*@
+
+            </dl>
+        </div>
+    </div>
+       
+</div>

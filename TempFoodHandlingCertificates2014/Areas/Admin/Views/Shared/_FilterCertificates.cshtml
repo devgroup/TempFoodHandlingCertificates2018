@@ -1,0 +1,163 @@
+﻿@model TempFoodHandlingCertificates2014.Areas.Admin.ViewModels.vmFilterCertificates
+<style type="text/css">
+     .searchBorder {
+         border: 1px solid black;
+         border-radius:10px;
+         padding: 5px;
+         background-color: oldlace;
+         font-size: 85%;
+     }
+</style>
+@*Move Html.BeginForm to index page so that this page can be submitted*@
+@*@using (Html.BeginForm())
+   
+{*@
+    @Html.AntiForgeryToken()
+    <div class="searchBorder">
+        <div class="form-horizontal">
+            <h4>Enter Search Criteria</h4>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RecordCount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.RecordCount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RecordCount, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.PaymentAndCertificateFilter, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => model.PaymentAndCertificateFilter, new SelectList(Model.PaymentAndCertificateFilterList, Model.PaymentAndCertificateFilter), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PaymentAndCertificateFilter, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ApplicantNamePartialSearch, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ApplicantNamePartialSearch, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ApplicantNamePartialSearch, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.EventNamePartialSearch, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.EventNamePartialSearch, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EventNamePartialSearch, "", new { @class = "text-danger" })
+                </div>
+
+
+            </div>
+
+            @*start of changes to seach on name of stall*@
+          
+            <div class="form-group">
+                @Html.LabelFor(model => model.StallBusinessNamePartialSearch, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.StallBusinessNamePartialSearch, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StallBusinessNamePartialSearch, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*end of changes to seach on name of stall*@
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubmittedDateStartSearch, htmlAttributes: new { @class = "control-label col-md-2", @id = "datepickerSubmittedDate" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.SubmittedDateStartSearchStringFormat, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubmittedDateStartSearch, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-1">
+                    @Html.Label(" and ")
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.SubmittedDateEndSearchStringFormat, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SubmittedDateEndSearch, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Any date submitted" name="submit" class="btn btn-default" />
+
+                </div>
+                <div class="col-md-2">
+
+                    <input type="submit" value="Submitted this week" name="submit" class="btn btn-default" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EventDateStartSearch, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.EventDateStartSearchStringFormat, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EventDateStartSearch, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-md-1">
+                    @Html.Label(" and ")
+                </div>
+
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.EventDateEndSearchStringFormat, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EventDateEndSearch, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2">
+
+                    <input type="submit" value="Any event date" name="submit" class="btn btn-default" />
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Events this week" name="submit" class="btn btn-default" />
+                    <input type="submit" value="Events next week" name="submit" class="btn btn-default" />
+
+                    @*<input type="submit" value="Events next week" name="submit" class="btn btn-default" />*@
+                    @*<input type="submit" value="Events next 7 days" name="submit" class="btn btn-default" />*@
+
+                </div>
+            </div>
+
+
+
+            @*<div class="form-group">
+            @Html.LabelFor(model => model., htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApplicantNamePartialSearch, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ApplicantNamePartialSearch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicantNamePartialSearch, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ApplicantNamePartialSearch, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ApplicantNamePartialSearch, "", new { @class = "text-danger" })
+            </div
+        </div>
+            *@
+
+            <!-- Add archive flag -->
+            <div class="form-group">
+                @Html.LabelFor(model => model.ShowArchived, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ShowArchived, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ShowArchived, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+                <div class="col-md-offset-4 col-md-3">
+                    @Html.ActionLink("View Customer Services Search Form", "Default", "Enquire", new { area = "Enquiry" }, new { @class = "btn btn-warning" })
+                </div>
+            </div>
+        </div>
+@*}  Closing off the form is commented out as form is moved to parent index page*@
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

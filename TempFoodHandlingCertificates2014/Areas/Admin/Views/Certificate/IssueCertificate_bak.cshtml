@@ -1,0 +1,62 @@
+﻿@model TempFoodHandlingCertificates2014.Areas.Admin.ViewModels.vmIssueCertificate
+
+
+@{
+    ViewBag.Title = "PrintCertificate";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPrint.cshtml";
+}
+
+<link href="~/Content/PrintStyleSheet.css" rel="stylesheet" media="print"/>
+
+<img src="~/Content/images/logo-hcc.gif" style="float:right" />
+<p class="site-title" style="float:left">
+    CERTIFICATE OF REGISTRATION <br />OF A TEMPORARY FOOD BUSINESS
+</p>
+<article style="width: 170mm">
+<h3>Food Act 2003</h3>
+<h3>S.87 &amp; S.88</h3>
+<div>The Hobart City Council, pursuant to S.87 and S.88 of the Food Act 2003 hereby registers the business</div>
+<pre>
+known as         @Html.DisplayFor(model => model.StallBusinessName)
+for the event    @Html.DisplayFor(model => model.EventName) 
+Situated at      @Html.DisplayFor(model => model.EventLocation) 
+Event start date @Html.DisplayFor(model => model.EventStartDate) 
+Proprietor       @Html.DisplayFor(model => model.ApplicantName)
+
+@{ 
+
+    if  (!String.IsNullOrWhiteSpace(Model.OtherEventDates ))
+    {
+@:Other dates      @Html.DisplayFor(model => model.OtherEventDates)
+    }
+
+}
+</pre>
+<div>as a food business for the handling of food for sale or the sale of food subject to the following conditions:</div>
+<ul>
+<li>This certificate permits the sale of foods listed on the application only</li>
+<li>This certificate is only valid for the date and duration of this event.</li>
+<li>Adequate hand washing facilities must be provided in accordance with the Department of Health &amp; Human Services Local Government Guidelines for Temporary Food Stalls.</li>
+<li>Potentially hazardous foods will be kept above 60&deg;C for hot food and under 50&deg;C for cold foods.</li>
+<li>The proprietor must comply with the requirements of the Department of Health &amp; Human Services Local Government Guidelines for Temporary Food Stalls.</li>
+<li>This certificate must be displayed in a prominent position within the food stall</li>
+<li>The food stall may be inspected by an authorised officer. The proprietor may be subject to enforcement action should any items of non-compliance be identified.</li>
+</ul>
+<h3>Manager Environmental Health</h3>
+<pre>
+Certificate No:  @Html.DisplayFor(model => model.AppId)
+Date of Issue:   @DateTime.Now
+</pre>
+<strong>THIS REGISTRATION IS NOT TRANSFERABLE</strong>
+<h3>Review:</h3>
+<div>In accordance with section 93, you may apply to the Magistrates Court (Administrative Appeals
+Division) for a review of decisions relating to registration within 28 days after the:</div>
+<ol style="list-style: lower-alpha">
+<li>issue of the certificate of registration under section 87(6) or renewal of registration under
+section 89(4); or</li>
+<li> giving of notice of refusal under section 87(7) or section 89(5); or</li>
+<li> service of the notice of the variation, suspension or cancellation under section 91(5).</li>
+</ol>
+    <input type="button" value="Print Certificate" onclick= "javascript: window.print();"/>
+</article>
+

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<TempFoodHandlingCertificates2014.Areas.Enquiry.ViewModels.vmApplication>
+
+@{
+    ViewBag.Title = "ApplicationList";
+}
+
+
+@{ 
+    if (Model.Count() == 0)
+    {
+        <h4>No results found</h4>
+        return;
+    }
+}
+<h4>List of applications</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmittedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StallBusinessName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicantName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfFood)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+           @{ 
+               string appId = item.ApplicationId.ToString();
+           }
+            
+             @Html.ActionLink(appId, "EditDetails", new {  id=item.ApplicationId }) 
+             @*@Html.DisplayFor(modelItem => item.ApplicationId)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplaySubmittedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayEventStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StallBusinessName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicantName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfFood)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+    </tr>
+}
+
+</table>

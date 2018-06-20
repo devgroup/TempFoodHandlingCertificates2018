@@ -1,0 +1,55 @@
+﻿
+.myHeading {
+    color:firebrick;
+}
+
+.smallCaps {
+    font-variant: small-caps;
+}
+
+
+pre {
+ 
+  background-color: white;
+  border: none;
+  
+}
+
+input.fakelink{
+    border: 0px;
+    background-color: transparent;
+    color: blue;
+    cursor: hand;
+  
+} 
+.fakelink:hover{
+    text-decoration: underline;
+}
+
+.body-content {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.topPadding10 {
+    padding-top: 10px;
+   
+}
+.navbar-inverse {
+border-color: #fff;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #ffffff;
+  
+}
+
+.navbar-brand {
+  float: left;
+  padding: 15px 15px;
+  /*font-size: 18px; */
+  font-size: 36px;
+  /*line-height: 20px; */
+  line-height: 40px;
+  color: #ffffff;
+}
